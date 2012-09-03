@@ -34,6 +34,7 @@ from ssh.resource import ResourceManager
 from ssh.rsakey import RSAKey
 from ssh.ssh_exception import SSHException, BadHostKeyException
 from ssh.transport import Transport
+from ssh.util import retry_on_signal
 
 
 SSH_PORT = 22
@@ -293,7 +294,7 @@ class SSHClient (object):
                 sock.settimeout(timeout)
             except:
                 pass
-        sock.connect(addr)
+        retry_on_signal(lambda: sock.connect(addr))
         t = self._transport = Transport(sock)
         t.use_compression(compress=compress)
         if self._log_channel is not None:

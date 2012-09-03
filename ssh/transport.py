@@ -45,6 +45,7 @@ from ssh.rsakey import RSAKey
 from ssh.server import ServerInterface
 from ssh.sftp_client import SFTPClient
 from ssh.ssh_exception import SSHException, BadAuthenticationType, ChannelException
+from ssh.util import retry_on_signal
 
 from Crypto import Random
 from Crypto.Cipher import Blowfish, AES, DES3, ARC4
@@ -289,7 +290,7 @@ class Transport (threading.Thread):
                     addr = sockaddr
                     sock = socket.socket(af, socket.SOCK_STREAM)
                     try:
-                        sock.connect((hostname, port))
+                        retry_on_signal(lambda: sock.connect((hostname, port)))
                     except socket.error, e:
                         reason = str(e)
                     else:
