@@ -35,6 +35,7 @@ from ssh.message import Message
 from ssh.pkey import PKey
 from ssh.channel import Channel
 from ssh.common import io_sleep
+from ssh.util import retry_on_signal
 
 SSH2_AGENTC_REQUEST_IDENTITIES, SSH2_AGENT_IDENTITIES_ANSWER, \
     SSH2_AGENTC_SIGN_REQUEST, SSH2_AGENT_SIGN_RESPONSE = range(11, 15)
@@ -202,7 +203,7 @@ class AgentClientProxy(object):
         if ('SSH_AUTH_SOCK' in os.environ) and (sys.platform != 'win32'):
             conn = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
             try:
-                conn.connect(os.environ['SSH_AUTH_SOCK'])
+                retry_on_signal(lambda: conn.connect(os.environ['SSH_AUTH_SOCK']))
             except:
                 # probably a dangling env var: the ssh agent is gone
                 return
