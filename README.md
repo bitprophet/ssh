@@ -1,16 +1,16 @@
-# ssh
+# PLEASE NOTE!
 
-The `ssh` library is a fork of, and spiritual successor to, the
-[Paramiko](http://www.lag.net/paramiko/) Python SSH library. It was created by
-the developers of the [Fabric](http://fabfile.org) library as a way to ensure
-timely updates and bugfixes for critical issues.
+This library started life as a fork of
+[Paramiko](https://github.com/paramiko/paramiko) but has now been [fully merged
+back upstream](http://bitprophet.org/blog/2012/09/29/paramiko-and-ssh/).
 
-`ssh` is currently in a transitional state and other than a rename and a
-handful of small but crucial fixes/tweaks, the code and the documentation
-remain unchanged from the original.
+As such, 'ssh' is defunct and will receive no future releases or attention:
+please change your dependencies back to Paramiko, and file any feature requests
+or bugfixes over on [Paramiko's
+tracker](https://github.com/paramiko/paramiko/issues).
 
-We hope to clean up the presentation and documentation in the near future, as
-more bugfixes and API additions are rolled out. We also plan to absorb some of
-the higher profile bugs/issues from the Paramiko Github repository.
-
-Thank you for your patience!
+We apologize for the inconvenience of switching dependencies around; it was the
+least crummy option open to us. [The
+announcement](http://bitprophet.org/blog/2012/09/29/paramiko-and-ssh/)
+(including comments!) explains the history and decision making in greater
+detail.
